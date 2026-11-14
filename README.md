@@ -25,6 +25,12 @@ Aplicación web progresiva (PWA) para aprender inglés desde nivel básico hasta
 
 El contenido de las fases 2 y 3 (A2 sólido y B1) se agrega antes de que lo necesites: el formato es texto simple en `src/content/`.
 
+## Diseño y datos personales
+
+- Paleta azul marino + coral, con colores propios por habilidad (listening, speaking, reading, writing, gramática, vocabulario, Data Analyst). Tema **Auto / Claro / Oscuro** desde el botón de la barra superior.
+- Títulos en inglés con subtítulo en español, para acostumbrarte al idioma sin perderte.
+- Tu nombre, foto y LinkedIn se configuran en `src/profile.ts` (la foto va en `public/`). Se muestran en la barra superior y en **Sobre mí**.
+
 ## Instalar en el iPhone o la laptop
 
 - **iPhone (Safari):** abre el enlace → botón Compartir → **Agregar a pantalla de inicio**.

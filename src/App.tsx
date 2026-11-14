@@ -1,4 +1,8 @@
+import { Icon, Logo, type IconName } from './components/icons'
 import { useHash } from './components/ui'
+import { THEME_LABEL, useTheme } from './lib/theme'
+import { PROFILE } from './profile'
+import { AboutView } from './views/About'
 import { useStore } from './store'
 import { DiagnosticView } from './views/Diagnostic'
 import { Home } from './views/Home'
@@ -10,11 +14,12 @@ import { ProgressView } from './views/ProgressView'
 import { Settings } from './views/Settings'
 import { WeekendView } from './views/Weekend'
 
-const NAV = [
-  { href: '#/', icon: '🏠', label: 'Hoy', match: (h: string) => h === '#/' || h.startsWith('#/lesson') || h.startsWith('#/weekend') || h.startsWith('#/diagnostic') },
-  { href: '#/practice', icon: '🎯', label: 'Practicar', match: (h: string) => h.startsWith('#/practice') },
-  { href: '#/progress', icon: '📈', label: 'Progreso', match: (h: string) => h.startsWith('#/progress') },
-  { href: '#/settings', icon: '⚙️', label: 'Ajustes', match: (h: string) => h.startsWith('#/settings') },
+const NAV: { href: string; icon: IconName; label: string; es: string; match: (h: string) => boolean }[] = [
+  { href: '#/', icon: 'today', label: 'Today', es: 'Hoy', match: (h) => h === '#/' || h.startsWith('#/lesson') || h.startsWith('#/weekend') || h.startsWith('#/diagnostic') },
+  { href: '#/practice', icon: 'practice', label: 'Practice', es: 'Practicar', match: (h) => h.startsWith('#/practice') },
+  { href: '#/progress', icon: 'progress', label: 'Progress', es: 'Progreso', match: (h) => h.startsWith('#/progress') },
+  { href: '#/about', icon: 'about', label: 'About me', es: 'Sobre mí', match: (h) => h.startsWith('#/about') },
+  { href: '#/settings', icon: 'settings', label: 'Settings', es: 'Ajustes', match: (h) => h.startsWith('#/settings') },
 ]
 
 function route(h: string) {
@@ -32,6 +37,8 @@ function route(h: string) {
       return <ProgressView />
     case 'settings':
       return <Settings />
+    case 'about':
+      return <AboutView />
     case 'practice':
       switch (p[1]) {
         case undefined:
@@ -59,33 +66,47 @@ function route(h: string) {
   return <Home />
 }
 
+function ThemeToggle() {
+  const { mode, cycle } = useTheme()
+  const icon: IconName = mode === 'auto' ? 'auto' : mode === 'light' ? 'sun' : 'moon'
+  return (
+    <button type="button" className="theme-toggle" onClick={cycle} title={`Tema: ${THEME_LABEL[mode]} (toca para cambiar)`} aria-label={`Tema: ${THEME_LABEL[mode]}. Cambiar tema`}>
+      <Icon name={icon} size={18} />
+      <span>{THEME_LABEL[mode]}</span>
+    </button>
+  )
+}
+
 export default function App() {
   const hash = useHash()
   const { loaded } = useStore()
   return (
     <div className="app">
-      <aside className="sidebar">
-        <a className="brand" href="#/">
-          <span className="logo">EC</span>
-          <span>
-            English Career Lab
-            <small>Data Analyst track</small>
-          </span>
-        </a>
-        <nav>
-          {NAV.map((n) => (
-            <a key={n.href} href={n.href} className={n.match(hash) ? 'on' : ''}>
-              <span className="nav-icon">{n.icon}</span>
-              <span>{n.label}</span>
-            </a>
-          ))}
-        </nav>
-      </aside>
+      <header className="topbar">
+        <div className="topbar-in">
+          <a className="brand" href="#/">
+            <Logo size={38} />
+            <span>
+              English Career Lab
+              <small>por {PROFILE.fullName}</small>
+            </span>
+          </a>
+          <nav className="topnav" aria-label="Secciones">
+            {NAV.map((n) => (
+              <a key={n.href} href={n.href} className={n.match(hash) ? 'on' : ''} title={n.es}>
+                <Icon name={n.icon} size={18} />
+                <span>{n.label}</span>
+              </a>
+            ))}
+          </nav>
+          <ThemeToggle />
+        </div>
+      </header>
       <main className="main">{loaded ? route(hash) : <p className="muted center">Cargando tu progreso…</p>}</main>
-      <nav className="tabbar">
+      <nav className="tabbar" aria-label="Secciones">
         {NAV.map((n) => (
           <a key={n.href} href={n.href} className={n.match(hash) ? 'on' : ''}>
-            <span className="nav-icon">{n.icon}</span>
+            <Icon name={n.icon} size={22} />
             <span>{n.label}</span>
           </a>
         ))}

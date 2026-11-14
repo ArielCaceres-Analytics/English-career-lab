@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'og.png'],
       manifest: {
         name: 'English Career Lab',
         short_name: 'Career Lab',
@@ -19,8 +19,8 @@ export default defineConfig({
         start_url: '.',
         scope: '.',
         display: 'standalone',
-        background_color: '#f4f6fb',
-        theme_color: '#4f46e5',
+        background_color: '#f6f4f0',
+        theme_color: '#1f3a68',
         icons: [
           { src: 'pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'pwa-512.png', sizes: '512x512', type: 'image/png' },

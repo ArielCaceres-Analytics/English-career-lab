@@ -10,7 +10,7 @@ import { today, wordDiff } from '../lib/normalize'
 import { LESSON_STEPS, useStore, useStudyTimer } from '../store'
 import type { StepKey } from '../types'
 
-const STEP_INFO: Record<StepKey, { title: string; min: number }> = {
+export const STEP_INFO: Record<StepKey, { title: string; min: number }> = {
   review: { title: 'Repaso espaciado y palabras nuevas', min: 10 },
   grammar: { title: 'Gramática del día', min: 10 },
   listening: { title: 'Escucha: diálogo, dictado y shadowing', min: 10 },
