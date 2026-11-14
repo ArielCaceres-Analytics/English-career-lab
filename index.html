@@ -3,14 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#4f46e5" />
+    <meta name="theme-color" content="#1f3a68" />
+    <meta name="author" content="Ariel Cáceres Rosales" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:title" content="English Career Lab · Ariel Cáceres" />
+    <meta property="og:description" content="Mi plan de 9 meses para llegar a inglés B1 y trabajar como Data Analyst en empresas de EE.UU." />
+    <meta property="og:image" content="https://arielcaceres-analytics.github.io/english-career-lab/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="description" content="Plataforma personal para aprender inglés para trabajar como Data Analyst en empresas de EE.UU." />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Career Lab" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <title>English Career Lab</title>
+    <title>English Career Lab · Ariel Cáceres</title>
+    <script>
+      // Aplica el tema guardado antes de pintar, para evitar un parpadeo de color.
+      try {
+        var t = localStorage.getItem('ecl-theme')
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t)
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

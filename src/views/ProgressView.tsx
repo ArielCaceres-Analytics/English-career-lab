@@ -28,7 +28,7 @@ export function ProgressView() {
   const skills: Skill[] = ['grammar', 'vocabulary', 'listening', 'reading']
   return (
     <div>
-      <Header title="Mi progreso" subtitle="Solo datos reales registrados en este dispositivo" />
+      <Header title="My progress" es="Mi progreso" subtitle="Solo datos reales registrados en este dispositivo" />
       <div className="stats-grid">
         <Card>
           <p className="muted small">Minutos totales</p>
@@ -37,7 +37,7 @@ export function ProgressView() {
         </Card>
         <Card>
           <p className="muted small">Racha</p>
-          <p className="big">🔥 {streak(days, profile)}</p>
+          <p className="big">{streak(days, profile)}</p>
           <p className="small muted">días seguidos</p>
         </Card>
         <Card>

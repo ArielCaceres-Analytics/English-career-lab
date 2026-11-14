@@ -36,7 +36,7 @@ export function Card({ children, className = '' }: { children: ReactNode; classN
   return <section className={`card ${className}`}>{children}</section>
 }
 
-export function Header({ title, subtitle, back }: { title: string; subtitle?: string; back?: string }) {
+export function Header({ title, es, subtitle, back }: { title: string; es?: string; subtitle?: string; back?: string }) {
   return (
     <header className="page-header">
       {back && (
@@ -45,6 +45,7 @@ export function Header({ title, subtitle, back }: { title: string; subtitle?: st
         </a>
       )}
       <h1>{title}</h1>
+      {es && <p className="es">{es}</p>}
       {subtitle && <p className="muted">{subtitle}</p>}
     </header>
   )

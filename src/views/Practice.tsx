@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { daPhrases, dialogues, grammarTopics, interviewQuestions, readings, speakingTasks, topicById, vocabOrder, writingTasks } from '../content'
+import { Icon, type IconName } from '../components/icons'
 import { ExerciseRunner } from '../components/Exercise'
 import { ListeningBlock } from '../components/Listening'
 import { InterviewBlock, ReadingBlock, RolePlay, Theory, WritingBlock } from '../components/Output'
@@ -16,24 +17,26 @@ const unlockedCount = (len: number, cur: number) => Math.max(1, Math.ceil((len *
 export function PracticeHub() {
   const { cards } = useStore()
   const due = dueCards(cards).length
-  const items = [
-    { href: '#/practice/review', icon: '🔁', t: 'Repaso de errores y tarjetas', d: `${due} pendientes hoy` },
-    { href: '#/practice/grammar', icon: '🧩', t: 'Grammar Lab', d: 'Completar, ordenar, transformar y corregir' },
-    { href: '#/practice/vocab', icon: '🗂️', t: 'Vocabulary Trainer', d: 'Repetición espaciada con audio y ejemplos' },
-    { href: '#/practice/listening', icon: '🎧', t: 'Listening Lab', d: 'Diálogos, dictado y shadowing' },
-    { href: '#/practice/reading', icon: '📖', t: 'Reading Lab', d: 'Lecturas graduadas con preguntas' },
-    { href: '#/practice/speaking', icon: '🗣️', t: 'Speaking Practice', d: 'Role-plays con micrófono' },
-    { href: '#/practice/writing', icon: '✍️', t: 'Writing Lab', d: 'Mensajes y correos con corrección por reglas' },
-    { href: '#/practice/interview', icon: '💼', t: 'Simulador de entrevista', d: `${interviewQuestions.length} preguntas con respuestas modelo` },
-    { href: '#/practice/da', icon: '📊', t: 'Data Analyst English', d: 'Términos y frases de SQL, Excel, Power BI y KPIs' },
+  const items: { href: string; icon: IconName; sk: string; t: string; d: string }[] = [
+    { href: '#/practice/review', icon: 'review', sk: 'vocabulary', t: 'Repaso de errores y tarjetas', d: `${due} pendientes hoy` },
+    { href: '#/practice/grammar', icon: 'grammar', sk: 'grammar', t: 'Grammar Lab', d: 'Completar, ordenar, transformar y corregir' },
+    { href: '#/practice/vocab', icon: 'vocabulary', sk: 'vocabulary', t: 'Vocabulary Trainer', d: 'Repetición espaciada con audio y ejemplos' },
+    { href: '#/practice/listening', icon: 'listening', sk: 'listening', t: 'Listening Lab', d: 'Diálogos, dictado y shadowing' },
+    { href: '#/practice/reading', icon: 'reading', sk: 'reading', t: 'Reading Lab', d: 'Lecturas graduadas con preguntas' },
+    { href: '#/practice/speaking', icon: 'speaking', sk: 'speaking', t: 'Speaking Practice', d: 'Role-plays con micrófono' },
+    { href: '#/practice/writing', icon: 'writing', sk: 'writing', t: 'Writing Lab', d: 'Mensajes y correos con corrección por reglas' },
+    { href: '#/practice/interview', icon: 'interview', sk: 'data', t: 'Interview Simulator', d: `Simulador de entrevista · ${interviewQuestions.length} preguntas con respuestas modelo` },
+    { href: '#/practice/da', icon: 'data', sk: 'data', t: 'Data Analyst English', d: 'Términos y frases de SQL, Excel, Power BI y KPIs' },
   ]
   return (
     <div>
-      <Header title="Practicar" subtitle="Práctica libre. El contenido se desbloquea a medida que avanzas en el plan." />
+      <Header title="Practice" es="Practicar" subtitle="Práctica libre. El contenido se desbloquea a medida que avanzas en el plan." />
       <div className="hub">
         {items.map((i) => (
           <a key={i.href} className="hub-item" href={i.href}>
-            <span className="hub-icon">{i.icon}</span>
+            <span className={`mini-ic sk-${i.sk}`}>
+              <Icon name={i.icon} size={22} />
+            </span>
             <span>
               <b>{i.t}</b>
               <span className="muted small">{i.d}</span>

@@ -33,7 +33,7 @@ export function Settings() {
 
   return (
     <div>
-      <Header title="Ajustes" />
+      <Header title="Settings" es="Ajustes" subtitle="Voz, palabras nuevas por lección y respaldo de tu progreso" />
       <Card>
         <h3>Voz en inglés</h3>
         {ttsSupported ? (
